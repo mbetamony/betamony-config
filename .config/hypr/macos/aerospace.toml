@@ -1,0 +1,120 @@
+# AeroSpace config -- macOS counterpart to this Hyprland setup.
+#
+# This file does nothing on Linux. On your Mac:
+#   1. brew install --cask nikitabobko/tap/aerospace
+#   2. mkdir -p ~/.config/aerospace && cp aerospace.toml ~/.config/aerospace/
+#   3. Log out/in (or launch AeroSpace from Spotlight) to start it.
+#
+# Key mapping -- same finger, same physical key position as the PC:
+#   Hyprland SUPER          -> AeroSpace alt   (Option key, 2nd from left on bottom row)
+#   Hyprland SUPER+SHIFT    -> AeroSpace alt-shift
+#   Hyprland SUPER+ALT      -> AeroSpace alt-cmd  (Cmd sits where ALT is on a PC keyboard)
+#
+# So alt-h/j/k/l (+ arrows) = focus, alt-shift-... = move window,
+# alt-cmd-... = resize, alt-1..6 = the same 6 profile workspaces as Hyprland.
+# See ../SHORTCUTS.md for the full picture.
+#
+# macOS already covers a few Hyprland binds natively, no rebind needed here:
+#   SUPER + R    (app launcher)   -> Cmd+Space (Spotlight)
+#   SUPER + P    (screenshot)     -> Cmd+Shift+4 / Cmd+Shift+5
+#   SUPER + End  (lock screen)    -> Cmd+Ctrl+Q
+#   SUPER + M    (log out)        -> Cmd+Shift+Q
+
+start-at-login = true
+
+enable-normalization-flatten-containers = true
+enable-normalization-opposite-orientation-for-nested-containers = true
+
+default-root-container-layout = 'tiles'
+default-root-container-orientation = 'auto'
+
+# Cosmetic only -- tweak or remove to taste.
+[gaps]
+inner.horizontal = 8
+inner.vertical = 8
+outer.left = 8
+outer.right = 8
+outer.top = 8
+outer.bottom = 8
+
+[mode.main.binding]
+
+# -- Focus (mirrors SUPER + h/j/k/l / arrows) --
+alt-h    = 'focus left'
+alt-left = 'focus left'
+alt-l     = 'focus right'
+alt-right = 'focus right'
+alt-k  = 'focus up'
+alt-up = 'focus up'
+alt-j    = 'focus down'
+alt-down = 'focus down'
+
+# -- Move focused window (mirrors SUPER+SHIFT + h/j/k/l / arrows) --
+alt-shift-h    = 'move left'
+alt-shift-left = 'move left'
+alt-shift-l     = 'move right'
+alt-shift-right = 'move right'
+alt-shift-k  = 'move up'
+alt-shift-up = 'move up'
+alt-shift-j    = 'move down'
+alt-shift-down = 'move down'
+
+# -- Resize focused window (mirrors SUPER+ALT + h/j/k/l / arrows) --
+# h/l (left/right) resize width, k/j (up/down) resize height -- same axes as Hyprland.
+alt-cmd-h    = 'resize width -50'
+alt-cmd-left = 'resize width -50'
+alt-cmd-l     = 'resize width +50'
+alt-cmd-right = 'resize width +50'
+alt-cmd-k  = 'resize height -50'
+alt-cmd-up = 'resize height -50'
+alt-cmd-j    = 'resize height +50'
+alt-cmd-down = 'resize height +50'
+
+# -- Workspaces (mirrors SUPER + 1..6, same 6 desktop profiles) --
+# 1 Browser, 2 Code, 3 Chat, 4 Media, 5 Gaming, 6 Streaming
+alt-1 = 'workspace 1'
+alt-2 = 'workspace 2'
+alt-3 = 'workspace 3'
+alt-4 = 'workspace 4'
+alt-5 = 'workspace 5'
+alt-6 = 'workspace 6'
+
+# -- Move focused window to a workspace (mirrors SUPER+SHIFT + 1..6) --
+alt-shift-1 = 'move-node-to-workspace 1'
+alt-shift-2 = 'move-node-to-workspace 2'
+alt-shift-3 = 'move-node-to-workspace 3'
+alt-shift-4 = 'move-node-to-workspace 4'
+alt-shift-5 = 'move-node-to-workspace 5'
+alt-shift-6 = 'move-node-to-workspace 6'
+
+# -- Apps & window state --
+# Change "Ghostty" to whatever terminal app you use on the Mac.
+alt-enter = 'exec-and-forget open -a Ghostty'
+alt-e     = 'exec-and-forget open -a Finder'   # mirrors SUPER+E (file manager)
+alt-q     = 'close'                            # mirrors SUPER+Q
+alt-f     = 'fullscreen'                       # mirrors SUPER+F
+alt-v     = 'layout floating tiling'           # mirrors SUPER+V (float toggle)
+
+# AeroSpace has no true scratchpad like Hyprland's "special" workspaces, so
+# there's no direct equivalent of the SUPER+` quickterm dropdown. The closest
+# is jumping back to whatever workspace you were just on:
+alt-grave = 'workspace-back-and-forth'
+
+# Reload this config after editing it (AeroSpace-only convenience, no Hyprland equivalent).
+alt-shift-r = 'reload-config'
+
+# -- Auto-assign apps to workspaces, like the Hyprland desktop profiles --
+# Find an app's id with: aerospace list-apps
+# Uncomment and adjust as needed, e.g.:
+#
+# [[on-window-detected]]
+# if.app-id = 'company.thebrowser.Browser'   # Browser profile -> workspace 1
+# run = 'move-node-to-workspace 1'
+#
+# [[on-window-detected]]
+# if.app-id = 'com.microsoft.VSCode'         # Code profile -> workspace 2
+# run = 'move-node-to-workspace 2'
+#
+# [[on-window-detected]]
+# if.app-id = 'com.hnc.Discord'              # Chat profile -> workspace 3
+# run = 'move-node-to-workspace 3'
